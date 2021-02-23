@@ -13,7 +13,7 @@ import (
 
 var db *sql.DB
 
-func TestMain(t *testing.M) {
+func TestMain(m *testing.M) {
 	// uses a sensible default on windows (tcp/http) and linux/osx (socket)
 	pool, err := dockertest.NewPool("")
 	if err != nil {
@@ -32,7 +32,7 @@ func TestMain(t *testing.M) {
   }
   pg, err := pool.RunWithOptions(pgopts)
   if err != nil {
-    t.Fatalf("Could not start resource: %s", err)
+    log.Fatalf("Could not start resource: %s", err)
   }
   var db *sql.DB
 	if err = pool.Retry(func() error {
@@ -43,7 +43,7 @@ func TestMain(t *testing.M) {
 		}
 		return db.Ping()
 	}); err != nil {
-		t.Fatal(err)
+		log.Fatal(err)
 	}
 
 	// // pulls an image, creates a container based on it and runs it
@@ -74,7 +74,7 @@ func TestMain(t *testing.M) {
 
 	// You can't defer this because os.Exit doesn't care for defer
   if err = pool.Purge(pg); err != nil {
-    t.Fatalf("Could not purge resource: %s", err)
+    log.Fatalf("Could not purge resource: %s", err)
   }
 
 	os.Exit(code)
