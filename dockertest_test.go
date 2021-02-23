@@ -7,8 +7,9 @@ import (
 	"os"
 	"testing"
 
-	_ "github.com/go-sql-driver/mysql"
+	// _ "github.com/go-sql-driver/mysql"
 	"github.com/ory/dockertest/v3"
+  _ "github.com/lib/pq"
 )
 
 var db *sql.DB
