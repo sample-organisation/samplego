@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+  "strings"
 	"testing"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -30,8 +31,11 @@ func TestMain(m *testing.M) {
 	if err := pool.Retry(func() error {
 		var err error
     p := resource.GetPort("3306/tcp")
-    dHost := os.Getenv("DOCKER_HOST")
+    dHostFull := os.Getenv("DOCKER_HOST")
+    dHostWithPort := strings.Replace(dHostFull, "tcp://", "", 1)
+    dHost := strings.Replace(dHostWithPort, ":2376", "", 1)
     fmt.Printf("p = %+v DOCKER_HOST = %s", p, dHost)
+
 		db, err = sql.Open("mysql", fmt.Sprintf("root:secret@(%s:%s)/mysql", dHost, p))
 		if err != nil {
 			return err
