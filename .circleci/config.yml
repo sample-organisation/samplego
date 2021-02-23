@@ -10,4 +10,6 @@ jobs:
     steps:
       - checkout
       - run: go get -v -t -d ./...
+      - setup_remote_docker:
+        version: 19.03.8
       - run: go test -v ./...
