@@ -70,12 +70,12 @@ func TestMain(m *testing.M) {
 	// 	log.Fatalf("Could not connect to docker: %s", err)
 	// }
   //
-	// code := m.Run()
 
 	// You can't defer this because os.Exit doesn't care for defer
   if err = pool.Purge(pg); err != nil {
     log.Fatalf("Could not purge resource: %s", err)
   }
 
+	code := m.Run()
 	os.Exit(code)
 }
