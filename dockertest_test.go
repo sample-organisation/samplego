@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-  "strings"
 	"testing"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -14,7 +13,7 @@ import (
 
 var db *sql.DB
 
-func TestMain(m *testing.M) {
+func TestMain(t *testing.M) {
 	// uses a sensible default on windows (tcp/http) and linux/osx (socket)
 	pool, err := dockertest.NewPool("")
 	if err != nil {
