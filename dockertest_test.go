@@ -1,4 +1,4 @@
-package dockertest_test
+package main
 
 import (
 	"database/sql"
