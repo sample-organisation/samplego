@@ -27,10 +27,10 @@ func TestMain(m *testing.M) {
 	}
 
 	// exponential backoff-retry, because the application in the container might not be ready to accept connections yet
-  p := resource.GetPort("3306/tcp")
-  fmt.Printf("p = %+v", p)
 	if err := pool.Retry(func() error {
 		var err error
+    p := resource.GetPort("3306/tcp")
+    fmt.Printf("p = %+v", p)
 		db, err = sql.Open("mysql", fmt.Sprintf("root:secret@(localhost:%s)/mysql", p))
 		if err != nil {
 			return err
