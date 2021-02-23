@@ -30,7 +30,7 @@ func TestMain(m *testing.M) {
 	if err := pool.Retry(func() error {
 		var err error
     p := resource.GetPort("3306/tcp")
-    dHost := os.GetEnv("DOCKER_HOST")
+    dHost := os.Getenv("DOCKER_HOST")
     fmt.Printf("p = %+v DOCKER_HOST = %s", p, dHost)
 		db, err = sql.Open("mysql", fmt.Sprintf("root:secret@(%s:%s)/mysql", dHost, p))
 		if err != nil {
